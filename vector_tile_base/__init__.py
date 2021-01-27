@@ -12,5 +12,5 @@ FloatList = engine.FloatList
 UInt = engine.UInt
 scaling_calculation = engine.scaling_calculation
 
-__version__ = "1.0"
+__version__ = "1.0.1"
 
