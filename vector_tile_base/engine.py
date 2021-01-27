@@ -809,15 +809,24 @@ class Layer(object):
             self._values = []
             self._decode_values()
 
-        self._decode_attribute_scalings()
+        # TODO: Upgrade the library and uncomment self._decode_attribute_scalings().
+        # Commented to work with the proto file 2.1 from vector_tile_spec
+        # https://github.com/mapbox/vector-tile-spec/blob/master/2.1/vector_tile.proto
+
+        # self._decode_attribute_scalings()
 
         if x is not None and y is not None and zoom is not None:
             self.set_tile_location(zoom, x, y)
 
-        if self._layer.HasField('elevation_scaling'):
-            self._elevation_scaling = Scaling(self._layer.elevation_scaling)
-        else:
-            self._elevation_scaling = None
+        # TODO: Upgrade the library and uncomment self._elevation_scaling condition.
+        # Commented to work with the proto file 2.1 from vector_tile_spec
+        # https://github.com/mapbox/vector-tile-spec/blob/master/2.1/vector_tile.proto
+
+        # if self._layer.HasField('elevation_scaling'):
+        #     self._elevation_scaling = Scaling(self._layer.elevation_scaling)
+        # else:
+        #     self._elevation_scaling = None
+        self._elevation_scaling = None
 
         self._build_features()
 
