@@ -258,9 +258,12 @@ class Feature(object):
         self._feature = feature
         self._layer = layer
         if has_elevation is None:
-            if len(self._feature.elevation) != 0:
-                self._has_elevation = True
-            else:
+            try:
+                if len(self._feature.elevation) != 0:
+                    self._has_elevation = True
+                else:
+                    self._has_elevation = False
+            except Exception:
                 self._has_elevation = False
         else:
             if has_elevation and self._layer.version < 3:
