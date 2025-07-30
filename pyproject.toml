@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vector_tile_base"
+version = "1.0.2"
+description = "Python implementation of Mapbox vector tiles"
+readme = "README.md"
+license = {text = "BSD"}
+authors = [
+    {name = "Sean Gillies", email = "sean@mapbox.com"}
+]
+maintainers = [
+    {name = "Sean Gillies", email = "sean@mapbox.com"}
+]
+keywords = ["vector", "tiles", "mapbox", "protobuf"]
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "protobuf>=3.20.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/mapbox/vector-tile-base"
+Repository = "https://github.com/mapbox/vector-tile-base"
+Documentation = "https://github.com/mapbox/vector-tile-base"
+Issues = "https://github.com/mapbox/vector-tile-base/issues"
+
+[tool.setuptools]
+packages = ["vector_tile_base"]
+
+[tool.setuptools.package-data]
+vector_tile_base = ["*.proto"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=vector_tile_base",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+] 
