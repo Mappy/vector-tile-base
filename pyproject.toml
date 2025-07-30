@@ -7,7 +7,7 @@ name = "vector_tile_base"
 version = "1.0.2"
 description = "Python implementation of Mapbox vector tiles"
 readme = "README.md"
-license = {text = "BSD"}
+license = "BSD"
 authors = [
     {name = "Sean Gillies", email = "sean@mapbox.com"}
 ]
@@ -16,10 +16,13 @@ maintainers = [
 ]
 keywords = ["vector", "tiles", "mapbox", "protobuf"]
 classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Topic :: Scientific/Engineering :: GIS",
 ]
-requires-python = ">=3.11"
+#for jenkins compatibility
+requires-python = ">=3.9"
 dependencies = [
     "protobuf>=3.20.0",
 ]
@@ -41,6 +44,8 @@ packages = ["vector_tile_base"]
 
 [tool.setuptools.package-data]
 vector_tile_base = ["*.proto"]
+
+
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
