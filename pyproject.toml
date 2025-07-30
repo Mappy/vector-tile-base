@@ -11,11 +11,12 @@ license = "BSD-3-Clause"
 authors = [
     {name = "Sean Gillies", email = "sean@mapbox.com"}
 ]
-maintainers = [
-    {name = "Sean Gillies", email = "sean@mapbox.com"}
-]
 keywords = ["vector", "tiles", "mapbox", "protobuf"]
 classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -32,29 +33,8 @@ test = [
     "pytest-cov>=4.0.0",
 ]
 
-[project.urls]
-Homepage = "https://github.com/mapbox/vector-tile-base"
-Repository = "https://github.com/mapbox/vector-tile-base"
-Documentation = "https://github.com/mapbox/vector-tile-base"
-Issues = "https://github.com/mapbox/vector-tile-base/issues"
-
 [tool.setuptools]
 packages = ["vector_tile_base"]
 
 [tool.setuptools.package-data]
-vector_tile_base = ["*.proto"]
-
-
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = [
-    "--strict-markers",
-    "--strict-config",
-    "--cov=vector_tile_base",
-    "--cov-report=term-missing",
-    "--cov-report=html",
-] 
+vector_tile_base = ["*.proto"] 
