@@ -1,2 +1,2 @@
-protobuf>6
+protobuf==4.21
 pytest

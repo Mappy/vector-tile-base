@@ -3,6 +3,23 @@ vector-tile-base
 
 This library encodes and decodes [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec). It is intended for use by developers with clear understanding of the Vector Tile format. The code is written as a pure python implementation with support of the google protobuf python format. 
 
+## For compatibility with protobuf 4.21.1
+Regenerate the protobuf files from the protobuf definitions.
+
+Get the right version of protoc
+
+```bash
+PB_REL="https://github.com/protocolbuffers/protobuf/releases"
+curl -LO $PB_REL/download/v22.1/protoc-22.1-linux-x86_64.zip
+unzip protoc-22.1-linux-x86_64.zip
+```
+
+
+```bash
+./bin/protoc --python_out=vector_tile_base vector_tile.proto
+```
+
+
 ## Features
 
 - ✅ **Python 3.11+ Support**: Fully compatible with modern Python versions

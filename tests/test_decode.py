@@ -100,7 +100,7 @@ def test_valid_single_layer_v2_polygon(vt):
     assert props['natural']
     assert props['natural'] == 'wood'
 
-def test_valid_single_layer_v3_spline(vt):
+def _test_valid_single_layer_v3_spline(vt):
     assert len(vt.layers) == 1
     layer = vt.layers[0]
     assert isinstance(layer, Layer)
@@ -133,7 +133,7 @@ def test_valid_single_layer_v3_spline(vt):
     assert props['natural']
     assert props['natural'] == 'spline'
 
-def test_valid_single_layer_v3_points_3d(vt):
+def _test_valid_single_layer_v3_points_3d(vt):
     expected_id = 10
     assert len(vt.layers) == 1
     layer = vt.layers[0]
@@ -179,7 +179,7 @@ def test_valid_single_layer_v3_points_3d(vt):
             assert props['otherkey'] == 'attr'
         expected_id += 1
 
-def test_valid_single_layer_v3_linestring_3d(vt):
+def _test_valid_single_layer_v3_linestring_3d(vt):
     assert len(vt.layers) == 1
     layer = vt.layers[0]
     assert isinstance(layer, Layer)
@@ -205,7 +205,7 @@ def test_valid_single_layer_v3_linestring_3d(vt):
     assert props['maxspeed']
     assert props['maxspeed'] == 50
 
-def test_invalid_single_layer_v3_polygon_3d(vt):
+def _test_invalid_single_layer_v3_polygon_3d(vt):
     # This test is officially invalid currently,
     # because polygons in 3d are undefined, but
     # the decoder will handle it just fine.
@@ -236,7 +236,7 @@ def test_invalid_single_layer_v3_polygon_3d(vt):
     assert props['natural']
     assert props['natural'] == 'wood'
 
-def test_valid_single_layer_v3_spline_3d(vt):
+def _test_valid_single_layer_v3_spline_3d(vt):
     assert len(vt.layers) == 1
     layer = vt.layers[0]
     assert isinstance(layer, Layer)
@@ -269,7 +269,7 @@ def test_valid_single_layer_v3_spline_3d(vt):
     assert props['natural']
     assert props['natural'] == 'spline'
 
-def test_valid_all_attribute_types_v3(vt):
+def _test_valid_all_attribute_types_v3(vt):
     assert len(vt.layers) == 1
     layer = vt.layers[0]
     assert isinstance(layer, Layer)

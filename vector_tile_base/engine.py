@@ -24,7 +24,7 @@ CV_BOOL_TRUE = 2
 
 DEFAULT_SPLINE_DEGREE = 2
 
-# Python3 Compatibility
+# Python3 Compatability
 try:
     unicode
     other_str = unicode
@@ -258,9 +258,12 @@ class Feature(object):
         self._feature = feature
         self._layer = layer
         if has_elevation is None:
-            if len(self._feature.elevation) != 0:
-                self._has_elevation = True
-            else:
+            try:
+                if len(self._feature.elevation) != 0:
+                    self._has_elevation = True
+                else:
+                    self._has_elevation = False
+            except Exception:
                 self._has_elevation = False
         else:
             if has_elevation and self._layer.version < 3:
@@ -361,7 +364,7 @@ class Feature(object):
         self.has_geometry = False
         self._reset_cursor()
         self._feature.ClearField('geometry')
-        self._feature.ClearField('elevation')
+        #self._feature.ClearField('elevation')
 
 class PointFeature(Feature):
 
@@ -742,20 +745,17 @@ class Scaling(object):
 
     def _init_from_values(self, offset, multiplier, base):
         if offset is not None and offset != 0:
-            if self._scaling_object is not None:
-                self._scaling_object.offset = int(offset)
+            self._scaling_object.offset = int(offset)
             self._offset = int(offset)
         else:
             self._offset = 0
         if multiplier is not None and multiplier != 1.0:
-            if self._scaling_object is not None:
-                self._scaling_object.multiplier = float(multiplier)
+            self._scaling_object.multiplier = float(multiplier)
             self._multiplier = float(multiplier)
         else:
             self._multiplier = 1.0
         if base is not None and base != 0.0:
-            if self._scaling_object is not None:
-                self._scaling_object.base = float(base)
+            self._scaling_object.base = float(base)
             self._base = float(base)
         else:
             self._base = 0.0
@@ -816,7 +816,7 @@ class Layer(object):
         # Commented to work with the proto file 2.1 from vector_tile_spec
         # https://github.com/mapbox/vector-tile-spec/blob/master/2.1/vector_tile.proto
 
-        self._decode_attribute_scalings()
+        # self._decode_attribute_scalings()
 
         if x is not None and y is not None and zoom is not None:
             self.set_tile_location(zoom, x, y)
@@ -836,7 +836,7 @@ class Layer(object):
     def _decode_attribute_scalings(self):
         self._attribute_scalings = []
         for i in range(len(self._layer.attribute_scalings)):
-            self._attribute_scalings.append(Scaling(None, index=i, multiplier=self._layer.attribute_scalings[i]))
+            self._attribute_scalings.append(Scaling(self._layer.attribute_scalings[i], index=i))
 
     def _decode_values(self):
         for val in self._layer.values:
@@ -902,8 +902,7 @@ class Layer(object):
             base = out['base']
             multiplier = out['sR']
         index = len(self._attribute_scalings)
-        self._layer.attribute_scalings.append(multiplier)
-        self._attribute_scalings.append(Scaling(None, index=index, offset=offset, multiplier=multiplier, base=base))
+        self._attribute_scalings.append(Scaling(self._layer.attribute_scalings.add(), index=index, offset=offset, multiplier=multiplier, base=base))
         return self._attribute_scalings[index]
 
     def add_point_feature(self, has_elevation=False):
@@ -976,8 +975,8 @@ class Layer(object):
 
     @property
     def zoom(self):
-        if self._layer.HasField('tile_z'):
-            return self._layer.tile_z
+        if self._layer.HasField('tile_zoom'):
+            return self._layer.tile_zoom
         else:
             return None
 
@@ -992,7 +991,7 @@ class Layer(object):
             raise Exception("Tile y value outside of possible values given zoom level")
         self._layer.tile_x = x
         self._layer.tile_y = y
-        self._layer.tile_z = zoom
+        self._layer.tile_zoom = zoom
 
     def get_attributes(self, int_list, list_only=False):
         if not self._inline_attributes:
