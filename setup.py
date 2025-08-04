@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="vector_tile_base",
-    version="1.0.2",
+    version="1.0.3",
     description="Python implementation of Mapbox vector tiles",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
