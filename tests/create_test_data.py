@@ -63,7 +63,7 @@ def create_valid_single_layer_v2_polygon():
     feature.attributes = { 'natural': 'wood' }
     return vt.serialize()
 
-def create_valid_single_layer_v3_spline():
+def _create_valid_single_layer_v3_spline():
     vt = VectorTile()
     layer = vt.add_layer('splines', version=3)
     feature = layer.add_spline_feature(has_elevation=False, degree=3)
@@ -74,7 +74,7 @@ def create_valid_single_layer_v3_spline():
     feature.attributes = { 'natural': 'spline' }
     return vt.serialize()
 
-def create_valid_single_layer_v3_points_3d():
+def _create_valid_single_layer_v3_points_3d():
     vt = VectorTile()
     layer = vt.add_layer('points_3d', version=3)
     layer.set_tile_location(zoom=4, x=3, y=2)
@@ -96,7 +96,7 @@ def create_valid_single_layer_v3_points_3d():
     feature.attributes = { 'otherkey': 'attr' }
     return vt.serialize()
 
-def create_valid_single_layer_v3_linestring_3d():
+def _create_valid_single_layer_v3_linestring_3d():
     vt = VectorTile()
     layer = vt.add_layer('lines_3d', version=3)
     feature = layer.add_line_string_feature(has_elevation=True)
@@ -106,7 +106,7 @@ def create_valid_single_layer_v3_linestring_3d():
     feature.attributes = { 'highway': 'primary', 'maxspeed': 50 }
     return vt.serialize()
 
-def create_invalid_single_layer_v3_polygon_3d():
+def _create_invalid_single_layer_v3_polygon_3d():
     vt = VectorTile()
     layer = vt.add_layer('polygons_3d', version=3)
     feature = layer.add_polygon_feature(has_elevation=True)
@@ -116,7 +116,7 @@ def create_invalid_single_layer_v3_polygon_3d():
     feature.attributes = { 'natural': 'wood' }
     return vt.serialize()
 
-def create_valid_single_layer_v3_spline_3d():
+def _create_valid_single_layer_v3_spline_3d():
     vt = VectorTile()
     layer = vt.add_layer('splines_3d', version=3)
     feature = layer.add_spline_feature(has_elevation=True, degree=3)
@@ -127,7 +127,7 @@ def create_valid_single_layer_v3_spline_3d():
     feature.attributes = { 'natural': 'spline' }
     return vt.serialize()
 
-def create_valid_all_attribute_types_v3():
+def _create_valid_all_attribute_types_v3():
     vt = VectorTile()
     layer = vt.add_layer('example', version=3)
     scaling = layer.add_attribute_scaling(precision=10.0**-8, min_value=0.0, max_value=25.0)

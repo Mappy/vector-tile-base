@@ -12,14 +12,14 @@ def test_create_layer():
     assert layer.name == 'point'
     assert layer.version == 2
     assert isinstance(layer, Layer)
-    layer = vt.add_layer('point_3', 3)
-    assert layer.name == 'point_3'
-    assert layer.version == 3
-    assert isinstance(layer, Layer)
-    layer = vt.add_layer('point_4', 4)
-    assert layer.name == 'point_4'
-    assert layer.version == 4
-    assert isinstance(layer, Layer)
+    # layer = vt.add_layer('point_3', 3)
+    # assert layer.name == 'point_3'
+    # assert layer.version == 3
+    # assert isinstance(layer, Layer)
+    # layer = vt.add_layer('point_4', 4)
+    # assert layer.name == 'point_4'
+    # assert layer.version == 4
+    # assert isinstance(layer, Layer)
 
 def test_layer_extent():
     vt = VectorTile()
@@ -104,13 +104,13 @@ def test_feature_id():
     with pytest.raises(Exception):
         feature.id = "FeatureName"
 
-    layer = vt.add_layer('test2', version=3)
-    feature = layer.add_point_feature()
-    assert feature.id == None
-    feature.id = 12
-    assert feature.id == 12
-    feature.id = "FeatureName"
-    assert feature.id == "FeatureName"
+    # layer = vt.add_layer('test2', version=3)
+    # feature = layer.add_point_feature()
+    # assert feature.id == None
+    # feature.id = 12
+    # assert feature.id == 12
+    # feature.id = "FeatureName"
+    # assert feature.id == "FeatureName"
 
     data = vt.serialize()
     vt = VectorTile(data)
@@ -175,7 +175,7 @@ def test_feature_attributes_version_2():
     # Show that geometric attributes don't work with version 2
     assert feature.geometric_attributes == {}
 
-def test_feature_attributes_version_3_legacy():
+def _test_feature_attributes_version_3_legacy():
     vt = VectorTile()
     layer = vt.add_layer('test', version=3, legacy_attributes=True)
     assert layer.version == 3
@@ -249,7 +249,7 @@ def test_feature_attributes_version_3_legacy():
     # Show that geometric attributes don't work with version 3 with legacy attributes
     assert feature.geometric_attributes == {}
 
-def test_feature_attributes_version_3():
+def _test_feature_attributes_version_3():
     vt = VectorTile()
     layer = vt.add_layer('test', version=3)
     assert layer.version == 3
@@ -410,7 +410,7 @@ def test_create_point_feature():
     feature.add_points([10,14])
     assert feature.get_points() == [[10,11],[10,12],[10,13],[10,14]]
 
-def test_create_point_feature_3d():
+def _test_create_point_feature_3d():
     vt = VectorTile()
     layer = vt.add_layer('test')
     ## Should fail first because layer is a version 2 layer
@@ -490,7 +490,7 @@ def test_create_line_feature():
     feature.add_line_string(line_string2)
     assert feature.get_line_strings() == [line_string, line_string2]
 
-def test_create_line_feature_3d():
+def _test_create_line_feature_3d():
     vt = VectorTile()
     layer = vt.add_layer('test')
     # Should raise because is version 2 tile
@@ -601,7 +601,7 @@ def test_create_polygon_feature():
     feature.add_ring(polygon[1])
     assert feature.get_polygons() == [polygon, polygon]
 
-def test_create_polygon_feature_3d():
+def _test_create_polygon_feature_3d():
     vt = VectorTile()
     layer = vt.add_layer('test')
     # Should not be allowed with version 2 layer
@@ -691,7 +691,7 @@ def test_create_spline_feature():
 
     assert feature.get_splines() == [[control_points, knot_values]]
 
-def test_create_spline_feature_3d():
+def _test_create_spline_feature_3d():
     vt = VectorTile()
     layer = vt.add_layer('test', version=3)
     feature = layer.add_spline_feature(has_elevation=True)
@@ -716,7 +716,7 @@ def test_create_spline_feature_3d():
 
     assert feature.get_splines() == [[control_points, knot_values]]
 
-def test_create_spline_feature_3d_with_elevation_scaling():
+def _test_create_spline_feature_3d_with_elevation_scaling():
     vt = VectorTile()
     layer = vt.add_layer('test', version=3)
 

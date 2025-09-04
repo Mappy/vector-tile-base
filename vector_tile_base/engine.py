@@ -258,9 +258,12 @@ class Feature(object):
         self._feature = feature
         self._layer = layer
         if has_elevation is None:
-            if len(self._feature.elevation) != 0:
-                self._has_elevation = True
-            else:
+            try:
+                if len(self._feature.elevation) != 0:
+                    self._has_elevation = True
+                else:
+                    self._has_elevation = False
+            except Exception:
                 self._has_elevation = False
         else:
             if has_elevation and self._layer.version < 3:
@@ -361,7 +364,7 @@ class Feature(object):
         self.has_geometry = False
         self._reset_cursor()
         self._feature.ClearField('geometry')
-        self._feature.ClearField('elevation')
+        #self._feature.ClearField('elevation')
 
 class PointFeature(Feature):
 

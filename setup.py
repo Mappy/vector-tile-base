@@ -1,37 +1,40 @@
+#!/usr/bin/env python3
 from setuptools import setup, find_packages
-import sys, os
 
-# Parse the version from the vector tile base module.
-with open('vector_tile_base/__init__.py') as f:
-    for line in f:
-        if line.find("__version__") >= 0:
-            version = line.split("=")[1].strip()
-            version = version.strip('"')
-            version = version.strip("'")
-            continue
-
-setup(name='vector_tile_base',
-      version=version,
-      description="Python implementation of Mapbox vector tiles",
-      long_description="""\
-""",
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='',
-      author='Sean Gillies',
-      author_email='sean@mapbox.com',
-      url='https://github.com/mapbox/vector-tile-base',
-      license='BSD',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-        'protobuf'
-      ],
-      extras_require={
-        'test': ['pytest'],
-      },
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
-      )
-
+setup(
+    name="vector_tile_base",
+    version="1.0.4",
+    description="Python implementation of Mapbox vector tiles",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    author="Sean Gillies",
+    author_email="sean@mapbox.com",
+    license="BSD-3-Clause",
+    keywords=["vector", "tiles", "mapbox", "protobuf"],
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Topic :: Scientific/Engineering :: GIS",
+    ],
+    python_requires=">=3.9",
+    packages=find_packages(),
+    install_requires=[
+        "protobuf>=3.20.0",
+    ],
+    extras_require={
+        "test": [
+            "pytest>=7.0.0",
+            "pytest-cov>=4.0.0",
+        ],
+    },
+    include_package_data=True,
+    package_data={
+        "vector_tile_base": ["*.proto"],
+    },
+) 
