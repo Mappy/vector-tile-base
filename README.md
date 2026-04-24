@@ -6,17 +6,15 @@ This library encodes and decodes [Mapbox Vector Tiles](https://github.com/mapbox
 ## For compatibility with protobuf 4.21.1
 Regenerate the protobuf files from the protobuf definitions.
 
-Get the right version of protoc
+Get the right version of protoc included in grpcio-tools
 
 ```bash
-PB_REL="https://github.com/protocolbuffers/protobuf/releases"
-curl -LO $PB_REL/download/v22.1/protoc-22.1-linux-x86_64.zip
-unzip protoc-22.1-linux-x86_64.zip
+pip install grpcio-tools
 ```
 
 
 ```bash
-./bin/protoc --python_out=vector_tile_base vector_tile.proto
+python -m grpc_tools.protoc -I. --python_out=vector_tile_base vector_tile.proto
 ```
 
 
